@@ -1,0 +1,41 @@
+// Typography
+$font-title: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$font-body: var(--font-work-sans), "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+// Brand & Custom Colors
+$color-primary: #39CDCC;          // Teal (Primary brand, buttons)
+$color-dark-blue: #213F7D;        // Dark Blue (Headers, title, navigation bold labels)
+$color-muted-blue: #545F7D;       // Muted Blue-Grey (Sidebar text, default labels, subheadings)
+$color-border-light: #545F7D26;   // 15% opacity variant of muted-blue (used for grid borders and light cards)
+
+// Status / Badge Colors
+$color-status-pink: #FF3366;      // Pink/Red badge (Blacklisted status)
+$color-status-orange: #F55F44;    // Orange badge (Pending status)
+$color-status-indigo: #5718FF;    // Indigo (Accent / specific cards)
+$color-status-purple: #DF18FF;    // Purple (Accent)
+$color-status-red: #E4033B;       // Crimson (Dangerous actions / Red alerts)
+
+// General Backgrounds and Greys
+$color-bg-main: #FBFBFB;          // Main background behind cards
+$color-bg-card: #FFFFFF;          // Cards and table container
+$color-status-active-bg: rgba(57, 205, 204, 0.06);     // Active user background
+$color-status-active-text: #39CDCC;                    // Active user text
+$color-status-pending-bg: rgba(245, 95, 68, 0.1);      // Pending user background
+$color-status-pending-text: #F55F44;                   // Pending user text
+$color-status-inactive-bg: rgba(84, 95, 125, 0.1);     // Inactive user background
+$color-status-inactive-text: #545F7D;                  // Inactive user text
+$color-status-blacklisted-bg: rgba(255, 51, 102, 0.1); // Blacklisted user background
+$color-status-blacklisted-text: #FF3366;               // Blacklisted user text
+
+// Font Weights
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+
+// Breakpoints for Responsiveness
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1400px;

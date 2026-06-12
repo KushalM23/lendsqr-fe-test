@@ -21,6 +21,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.7",
     "miragejs": "^0.1.48",
+    "sass": "^1.100.0",
     "typescript": "^5"
   }
 }

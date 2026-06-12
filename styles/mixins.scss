@@ -1,0 +1,60 @@
+@use 'variables' as *;
+
+// Responsive breakpoints helper
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'sm' {
+    @media (max-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == 'md' {
+    @media (max-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == 'lg' {
+    @media (max-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == 'xl' {
+    @media (max-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == 'xxl' {
+    @media (max-width: $breakpoint-xxl) { @content; }
+  }
+}
+
+// Custom Scrollbar
+@mixin custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color-muted-blue, 0.2);
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba($color-muted-blue, 0.4);
+  }
+}
+
+// Flexbox shorthand
+@mixin flex($justify: center, $align: center, $direction: row, $wrap: nowrap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+
+// Shadow styles
+@mixin shadow-sm {
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+@mixin shadow-md {
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.08);
+}
+
+// Cards styling
+@mixin base-card {
+  background-color: $color-bg-card;
+  border: 1px solid $color-border-light;
+  border-radius: 4px;
+  @include shadow-sm;
+}
