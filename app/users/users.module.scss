@@ -1,0 +1,560 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.usersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.pageHeader {
+  h1 {
+    font-size: 24px;
+    font-weight: $weight-semibold;
+    color: $color-dark-blue;
+    margin-bottom: 5px;
+  }
+}
+
+// Subheader stats (Reusing stats style but customized for table page)
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 26px;
+  width: 100%;
+
+  @include respond-to('xl') {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @include respond-to('sm') {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+}
+
+.statCard {
+  @include base-card;
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 140px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    @include shadow-md;
+  }
+}
+
+.iconWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  &.pink {
+    background-color: rgba($color-status-pink, 0.1);
+    color: $color-status-pink;
+  }
+
+  &.purple {
+    background-color: rgba($color-status-indigo, 0.1);
+    color: $color-status-indigo;
+  }
+
+  &.orange {
+    background-color: rgba($color-status-orange, 0.1);
+    color: $color-status-orange;
+  }
+
+  &.indigo {
+    background-color: rgba($color-status-purple, 0.1);
+    color: $color-status-purple;
+  }
+}
+
+.cardTitle {
+  font-size: 12px;
+  font-weight: $weight-semibold;
+  color: $color-muted-blue;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.cardValue {
+  font-family: $font-title;
+  font-size: 22px;
+  font-weight: $weight-bold;
+  color: $color-dark-blue;
+}
+
+// Table Wrapper
+.tableSection {
+  @include base-card;
+  background-color: $color-bg-card;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  @include respond-to('md') {
+    padding: 15px;
+  }
+}
+
+.tableHeaderSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  width: 100%;
+
+  h2 {
+    font-size: 18px;
+    font-weight: $weight-semibold;
+    color: $color-dark-blue;
+  }
+}
+
+.mainFilterWrapper {
+  position: relative;
+}
+
+.mainFilterBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(84, 95, 125, 0.15);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: $weight-semibold;
+  color: $color-muted-blue;
+  background-color: transparent;
+  transition: all 0.2s ease;
+
+  &:hover, &.active {
+    border-color: $color-primary;
+    color: $color-primary;
+    background-color: rgba($color-primary, 0.02);
+  }
+}
+
+.mainFilterDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  z-index: 120;
+  background-color: $color-bg-card;
+  border: 1px solid rgba(84, 95, 125, 0.15);
+  border-radius: 4px;
+  padding: 30px 20px;
+  width: 300px;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.scrollableTableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  @include custom-scrollbar;
+}
+
+.usersTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  
+  th, td {
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba($color-muted-blue, 0.1);
+    white-space: nowrap;
+  }
+
+  th {
+    font-size: 12px;
+    font-weight: $weight-semibold;
+    color: $color-muted-blue;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    user-select: none;
+  }
+
+  td {
+    font-size: 14px;
+    color: $color-muted-blue;
+  }
+
+  tbody tr {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba(57, 205, 204, 0.02);
+    }
+  }
+}
+
+// Th content alignment
+.headerContent {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  color: $color-muted-blue;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover, &.active {
+    background-color: rgba($color-muted-blue, 0.08);
+    color: $color-dark-blue;
+  }
+}
+
+// Filter Dropdown form
+.filterDropdown {
+  position: absolute;
+  top: 100%;
+  left: 16px;
+  z-index: 120;
+  background-color: $color-bg-card;
+  border: 1px solid rgba(84, 95, 125, 0.15);
+  border-radius: 4px;
+  padding: 30px 20px;
+  width: 270px;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-transform: none; // Disable header uppercase
+}
+
+.filterFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label {
+    font-size: 12px;
+    font-weight: $weight-medium;
+    color: $color-muted-blue;
+  }
+
+  input, select {
+    width: 100%;
+    border: 1px solid rgba(33, 63, 125, 0.15);
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 14px;
+    color: $color-muted-blue;
+    background-color: transparent;
+    transition: border-color 0.2s ease;
+
+    &::placeholder {
+      color: rgba($color-muted-blue, 0.4);
+    }
+
+    &:focus {
+      border-color: $color-primary;
+    }
+  }
+}
+
+.filterButtons {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.resetBtn {
+  flex: 1;
+  border: 1px solid $color-muted-blue;
+  color: $color-muted-blue;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: $weight-semibold;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba($color-muted-blue, 0.05);
+  }
+}
+
+.applyBtn {
+  flex: 1;
+  background-color: $color-primary;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: $weight-semibold;
+  font-size: 14px;
+  text-align: center;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// Action Three-Dot
+.actionWrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.actionThreeDot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 4px;
+  color: $color-muted-blue;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover, &.open {
+    background-color: rgba($color-muted-blue, 0.08);
+    color: $color-dark-blue;
+  }
+}
+
+.actionDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+  z-index: 130;
+  background-color: $color-bg-card;
+  border: 1px solid rgba(84, 95, 125, 0.08);
+  border-radius: 4px;
+  box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.actionItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: $color-muted-blue;
+  text-align: left;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background-color: rgba($color-primary, 0.05);
+    color: $color-dark-blue;
+  }
+}
+
+// Pagination
+.paginationSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  @include respond-to('sm') {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.pageSizeSelector {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: $color-muted-blue;
+
+  select {
+    border: none;
+    background-color: rgba(33, 63, 125, 0.05);
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: $color-dark-blue;
+    font-weight: $weight-semibold;
+    cursor: pointer;
+  }
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pageBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  font-size: 14px;
+  color: $color-muted-blue;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgba($color-muted-blue, 0.1);
+  }
+
+  &.active {
+    color: $color-dark-blue;
+    font-weight: $weight-semibold;
+  }
+
+  &.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+}
+
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: $color-muted-blue;
+  font-weight: $weight-medium;
+  user-select: none;
+}
+
+// Empty & Error states
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  gap: 16px;
+}
+
+.emptyTitle {
+  font-size: 18px;
+  font-weight: $weight-semibold;
+  color: $color-dark-blue;
+}
+
+.emptyDesc {
+  font-size: 14px;
+  color: $color-muted-blue;
+  max-width: 300px;
+}
+
+.emptyResetBtn {
+  background-color: $color-primary;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: $weight-semibold;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.errorState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  gap: 20px;
+  color: $color-status-red;
+}
+
+.retryBtn {
+  background-color: $color-status-red;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: $weight-semibold;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+// Skeleton loading table
+.skeletonCell {
+  padding: 20px 16px;
+}
+
+.skeletonBadge {
+  border-radius: 100px;
+}
+
+// Select and date input custom styling
+.selectWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 40px !important;
+  }
+
+  .selectChevron {
+    position: absolute;
+    right: 15px;
+    color: rgba($color-muted-blue, 0.6);
+    pointer-events: none;
+  }
+}
+
+.dateInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  input {
+    width: 100%;
+    padding-right: 40px !important;
+  }
+
+  .calendarIcon {
+    position: absolute;
+    right: 15px;
+    color: rgba($color-muted-blue, 0.4);
+    pointer-events: none;
+  }
+}
+

@@ -18,14 +18,14 @@ $color-status-red: #E4033B;       // Crimson (Dangerous actions / Red alerts)
 // General Backgrounds and Greys
 $color-bg-main: #FBFBFB;          // Main background behind cards
 $color-bg-card: #FFFFFF;          // Cards and table container
-$color-status-active-bg: rgba(57, 205, 204, 0.06);     // Active user background
-$color-status-active-text: #39CDCC;                    // Active user text
-$color-status-pending-bg: rgba(245, 95, 68, 0.1);      // Pending user background
-$color-status-pending-text: #F55F44;                   // Pending user text
-$color-status-inactive-bg: rgba(84, 95, 125, 0.1);     // Inactive user background
-$color-status-inactive-text: #545F7D;                  // Inactive user text
-$color-status-blacklisted-bg: rgba(255, 51, 102, 0.1); // Blacklisted user background
-$color-status-blacklisted-text: #FF3366;               // Blacklisted user text
+$color-status-active-bg: rgba(57, 205, 98, 0.06);     // Active user background (#39CD62 6%)
+$color-status-active-text: #39CD62;                    // Active user text (#39CD62)
+$color-status-pending-bg: rgba(233, 178, 0, 0.1);      // Pending user background (#E9B200 10%)
+$color-status-pending-text: #E9B200;                   // Pending user text (#E9B200)
+$color-status-inactive-bg: rgba(84, 95, 125, 0.06);    // Inactive user background (#545F7D 6%)
+$color-status-inactive-text: #545F7D;                  // Inactive user text (#545F7D)
+$color-status-blacklisted-bg: rgba(228, 3, 59, 0.1);   // Blacklisted user background (#E4033B 10%)
+$color-status-blacklisted-text: #E4033B;               // Blacklisted user text (#E4033B)
 
 // Font Weights
 $weight-normal: 400;

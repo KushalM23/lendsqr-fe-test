@@ -1,0 +1,127 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.sidebar {
+  width: 283px;
+  background-color: $color-bg-card;
+  border-right: 1px solid rgba(33, 63, 125, 0.06);
+  height: calc(100vh - 100px);
+  position: fixed;
+  top: 100px;
+  left: 0;
+  overflow-y: auto;
+  z-index: 90;
+  padding: 30px 0;
+  transition: transform 0.3s ease;
+  @include custom-scrollbar;
+
+  @include respond-to('lg') {
+    top: 70px;
+    height: calc(100vh - 70px);
+    transform: translateX(-100%);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  @include respond-to('md') {
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+}
+
+.backdrop {
+  display: none;
+  
+  @include respond-to('lg') {
+    &.open {
+      display: block;
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(33, 63, 125, 0.3);
+      backdrop-filter: blur(2px);
+      z-index: 80;
+    }
+  }
+}
+
+.orgSwitcher {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 30px;
+  margin-bottom: 30px;
+  color: $color-dark-blue;
+  cursor: pointer;
+  
+  span {
+    font-size: 16px;
+    font-weight: $weight-normal;
+  }
+  
+  .briefcase {
+    color: $color-dark-blue;
+  }
+
+  .chevron {
+    margin-left: auto;
+  }
+}
+
+.navGroup {
+  margin-bottom: 30px;
+}
+
+.groupLabel {
+  font-size: 12px;
+  font-weight: $weight-semibold;
+  color: $color-muted-blue;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0 30px;
+  margin-bottom: 15px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 30px;
+  color: $color-muted-blue;
+  font-size: 16px;
+  font-weight: $weight-normal;
+  border-left: 5px solid transparent;
+  transition: all 0.2s ease;
+  position: relative;
+
+  &:hover {
+    color: $color-dark-blue;
+    background-color: rgba(57, 205, 204, 0.03);
+  }
+
+  &.active {
+    color: $color-dark-blue;
+    background-color: rgba(57, 205, 204, 0.06);
+    border-left-color: $color-primary;
+    font-weight: $weight-medium;
+  }
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba(33, 63, 125, 0.08);
+  margin: 15px 30px;
+}
+
+.logoutBtn {
+  width: 100%;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+}

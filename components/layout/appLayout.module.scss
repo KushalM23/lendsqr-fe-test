@@ -1,0 +1,69 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.appContainer {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-bg-main;
+}
+
+.mainWrapper {
+  display: flex;
+  flex: 1;
+  margin-top: 100px;
+  min-height: calc(100vh - 100px);
+
+  @include respond-to('md') {
+    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+  }
+}
+
+.contentPage {
+  flex: 1;
+  margin-left: 283px;
+  padding: 60px;
+  width: calc(100% - 283px);
+  overflow-x: hidden;
+  transition: margin-left 0.3s ease, width 0.3s ease;
+
+  @include respond-to('lg') {
+    margin-left: 0;
+    width: 100%;
+    padding: 30px 20px;
+  }
+}
+
+.loadingOverlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: $color-bg-main;
+  gap: 16px;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba($color-primary, 0.1);
+  border-left-color: $color-primary;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  font-family: $font-body;
+  font-size: 16px;
+  color: $color-dark-blue;
+  font-weight: $weight-medium;
+}

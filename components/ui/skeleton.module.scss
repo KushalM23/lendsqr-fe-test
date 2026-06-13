@@ -1,0 +1,22 @@
+@use '../../styles/variables' as *;
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba($color-muted-blue, 0.06) 25%,
+    rgba($color-muted-blue, 0.12) 37%,
+    rgba($color-muted-blue, 0.06) 63%
+  );
+  background-size: 400% 100%;
+  animation: pulse-shimmer 1.4s ease infinite;
+  border-radius: 4px;
+}
+
+@keyframes pulse-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

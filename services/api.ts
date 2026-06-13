@@ -103,3 +103,54 @@ export async function login(email: string, password: string): Promise<LoginRespo
   }
   return result;
 }
+
+export interface UserStats {
+  totalUsers: number;
+  activeUsers: number;
+  usersWithLoans: number;
+  usersWithSavings: number;
+}
+
+export interface UserStatsResponse {
+  status: string;
+  message: string;
+  data: UserStats;
+}
+
+/**
+ * Fetches user statistics from mock API.
+ */
+export async function fetchUserStats(): Promise<UserStatsResponse> {
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+  const res = await fetch(`${origin}${API_BASE}/users/stats`, {
+    method: 'GET',
+    headers: getAuthHeaders(),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.message || `HTTP error! status: ${res.status}`);
+  }
+
+  return res.json();
+}
+
+/**
+ * Updates a user's status.
+ */
+export async function updateUserStatus(id: string, status: string): Promise<SingleUserResponseData> {
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+  const res = await fetch(`${origin}${API_BASE}/users/${id}`, {
+    method: 'PUT',
+    headers: getAuthHeaders(),
+    body: JSON.stringify({ status }),
+  });
+
+  if (!res.ok) {
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.message || `HTTP error! status: ${res.status}`);
+  }
+
+  return res.json();
+}
+

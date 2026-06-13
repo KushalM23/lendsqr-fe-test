@@ -189,9 +189,86 @@ export function makeServer({ environment = "development" } = {}) {
         );
       });
 
-      // Let unhandled requests pass through to avoid breaking Next.js hot-reloading
+      // 4. Get User Stats
+      this.get("/users/stats", (schema: any, request) => {
+        const authHeader = request.requestHeaders.authorization || request.requestHeaders.Authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer mock-jwt-token')) {
+          return new Response(401, {}, { status: "error", message: "Unauthorized: Missing or invalid token" });
+        }
+
+        const allUsers = schema.all("user").models;
+        const totalUsers = allUsers.length;
+        const activeUsers = allUsers.filter((u: any) => u.status === "active").length;
+        const usersWithLoans = allUsers.filter((u: any) => u.loanInformation && u.loanInformation.totalLoans > 0).length;
+        const usersWithSavings = allUsers.filter((u: any) => u.savings && u.savings.totalSavings > 0).length;
+
+        return new Response(
+          200,
+          {},
+          {
+            status: "success",
+            message: "Stats retrieved successfully",
+            data: {
+              totalUsers,
+              activeUsers,
+              usersWithLoans,
+              usersWithSavings,
+            },
+          }
+        );
+      });
+
+      // 5. Update User Status
+      this.put("/users/:id", (schema: any, request) => {
+        const authHeader = request.requestHeaders.authorization || request.requestHeaders.Authorization;
+        if (!authHeader || !authHeader.startsWith('Bearer mock-jwt-token')) {
+          return new Response(401, {}, { status: "error", message: "Unauthorized: Missing or invalid token" });
+        }
+
+        const id = request.params.id;
+        const user = schema.findBy("user", { id });
+
+        if (!user) {
+          return new Response(
+            404,
+            {},
+            {
+              status: "error",
+              message: "User not found",
+            },
+          );
+        }
+
+        let attrs;
+        try {
+          attrs = JSON.parse(request.requestBody);
+        } catch (e) {
+          return new Response(
+            400,
+            {},
+            {
+              status: "error",
+              message: "Invalid request body",
+            },
+          );
+        }
+
+        user.update(attrs);
+
+        return new Response(
+          200,
+          {},
+          {
+            status: "success",
+            message: "User updated successfully",
+            data: user.attrs,
+          },
+        );
+      });
+
+      // Let unhandled requests pass through to avoid breaking Next.js hot-reloading and RSC prefetching
       this.passthrough((request) => {
-        if (request.url.startsWith("/_next/")) return true;
+        return !request.url.includes("/api/");
       });
     },
   });

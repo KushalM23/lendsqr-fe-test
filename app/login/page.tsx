@@ -20,7 +20,7 @@ export default function LoginPage() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
-      router.push("/dashboard");
+      router.push("/users");
     }
   }, [router]);
 
@@ -54,7 +54,7 @@ export default function LoginPage() {
     setLoading(true);
     try {
       await login(email, password);
-      router.push("/dashboard");
+      router.push("/users");
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Invalid email or password. Please try again.";
       setGeneralError(errorMessage);

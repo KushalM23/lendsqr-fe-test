@@ -1,0 +1,214 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  background-color: $color-bg-card;
+  padding: 0 30px;
+  border-bottom: 1px solid rgba(33, 63, 125, 0.06);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 3px 0 20px rgba(0, 0, 0, 0.04);
+
+  @include respond-to('md') {
+    height: 70px;
+    padding: 0 16px;
+  }
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hamburger {
+  display: none;
+  color: $color-dark-blue;
+  cursor: pointer;
+
+  @include respond-to('lg') {
+    display: block;
+  }
+}
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+  
+  img {
+    height: 30px;
+    width: auto;
+
+    @include respond-to('md') {
+      height: 24px;
+    }
+  }
+}
+
+.searchSection {
+  flex: 1;
+  max-width: 400px;
+  margin-left: 100px;
+
+  @include respond-to('xl') {
+    margin-left: 40px;
+  }
+
+  @include respond-to('lg') {
+    display: none; // Hidden on mobile/tablet viewports, can open in a drawer if needed or just hid it
+  }
+}
+
+.searchForm {
+  display: flex;
+  border: 1px solid rgba(84, 95, 125, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 14px;
+  color: $color-muted-blue;
+  background-color: transparent;
+
+  &::placeholder {
+    color: rgba($color-muted-blue, 0.5);
+  }
+}
+
+.searchButton {
+  background-color: $color-primary;
+  color: #ffffff;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+
+  @include respond-to('md') {
+    gap: 15px;
+  }
+}
+
+.docsLink {
+  color: $color-dark-blue;
+  font-family: $font-body;
+  font-size: 16px;
+  font-weight: $weight-normal;
+  text-decoration: underline;
+
+  @include respond-to('md') {
+    display: none;
+  }
+}
+
+.notificationBtn {
+  position: relative;
+  color: $color-dark-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: rgba($color-primary, 0.05);
+  }
+}
+
+.profileWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  padding: 6px;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: rgba(33, 63, 125, 0.04);
+  }
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userName {
+  font-family: $font-body;
+  font-size: 16px;
+  font-weight: $weight-medium;
+  color: $color-dark-blue;
+
+  @include respond-to('md') {
+    display: none;
+  }
+}
+
+.chevron {
+  color: $color-dark-blue;
+  transition: transform 0.2s ease;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+
+  @include respond-to('md') {
+    display: none;
+  }
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background-color: $color-bg-card;
+  border: 1px solid rgba(84, 95, 125, 0.1);
+  border-radius: 8px;
+  box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.08);
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 110;
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: $color-muted-blue;
+  text-align: left;
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    background-color: rgba($color-primary, 0.05);
+    color: $color-dark-blue;
+  }
+}
